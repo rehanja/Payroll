@@ -28,11 +28,14 @@ class EmployeeService
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'nic' => 'required|string|max:10|unique:employees',
+            'designation' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:employees',
-            'roles' => 'required|array|min:1',
+            //'roles' => 'required|array|min:1',
             'address' => 'max:255',
 			'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
             'doj' => 'required|date|date_format:Y-m-d',
+            'basicSalary' => 'required|string|max:255',
         ]);
 
 		$is_created = Employee::create($validatedData);
@@ -120,19 +123,25 @@ class EmployeeService
         $employeeID = $this->commonService->decrypt($id);
 		$validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'nic' => 'required|string|max:10',
+            'designation' => 'required|string|max:20',
 			'email' => ['required', 'string', 'email', 'max:255', Rule::unique('employees')->ignore($employeeID),],
-            'roles' => 'required|array|min:1',
+            //'roles' => 'required|array|min:1',
             'address' => 'max:255',
 			'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1048',
             'doj' => 'required|date|date_format:Y-m-d',
+            'basicSalary' => 'required|string|max:255',
         ]);
 
         $employee = Employee::find($employeeID);
         if ($employee) {
-			$employee->name = $request->name;
+            $employee->name = $request->name;
+            $employee->nic = $request->nic;
+            $employee->designation = $request->designation;
 			$employee->email = $request->email;
 			$employee->address = $request->address;
-			$employee->doj = $request->doj;
+            $employee->doj = $request->doj;
+            $employee->basicSalary = $request->basicSalary;
 
 		if ($employee->save()) {
 			if ($request->filled('roles')) {
@@ -181,15 +190,18 @@ class EmployeeService
                 ->join('emp_roles', 'employees.id', '=', 'emp_roles.emp_id')
                 ->join('roles', 'emp_roles.role_id', '=', 'roles.id')
                 ->leftJoin('salaries', 'employees.id', '=', 'salaries.employee_id')
-                ->select(DB::raw('employees.name,employees.email,employees.photo,employees.doj,employees.id ,GROUP_CONCAT(roles.name)as roles,GROUP_CONCAT(salaries.basic_pay + salaries.hra + salaries.medical_allowance + salaries.special_allowance + salaries.transport + salaries.lta + salaries.incentive ) as total_pay, GROUP_CONCAT(salaries.provident_fund + salaries.professional_tax)  as total_deduction, CONCAT(SUM(salaries.basic_pay + salaries.hra + salaries.medical_allowance + salaries.special_allowance + salaries.transport + salaries.lta + salaries.incentive)) as pay, CONCAT(SUM(salaries.provident_fund + salaries.professional_tax)) as dedu,  CONCAT(SUM(salaries.basic_pay + salaries.hra + salaries.medical_allowance + salaries.special_allowance + salaries.transport + salaries.lta + salaries.incentive - salaries.provident_fund - salaries.professional_tax)) as salary'))
+                ->select(DB::raw('employees.name,employees.nic,employees.email,employees.photo,employees.doj,employees.id ,GROUP_CONCAT(roles.name)as roles,GROUP_CONCAT(salaries.basic_pay + salaries.hra + salaries.medical_allowance + salaries.special_allowance + salaries.transport + salaries.lta + salaries.incentive ) as total_pay, GROUP_CONCAT(salaries.provident_fund + salaries.professional_tax)  as total_deduction, CONCAT(SUM(salaries.basic_pay + salaries.hra + salaries.medical_allowance + salaries.special_allowance + salaries.transport + salaries.lta + salaries.incentive)) as pay, CONCAT(SUM(salaries.provident_fund + salaries.professional_tax)) as dedu,  CONCAT(SUM(salaries.basic_pay + salaries.hra + salaries.medical_allowance + salaries.special_allowance + salaries.transport + salaries.lta + salaries.incentive - salaries.provident_fund - salaries.professional_tax)) as salary'))
                 ->groupBy('employees.id');
 
             if ($search_for) {
                 $buildQuery->where(function ($query) use ($search_for) {
                     $query->where('employees.name', 'LIKE', '%' . $search_for . '%');
+                    $query->where('employees.nic', 'LIKE', '%' . $search_for . '%');
+                    $query->where('employees.designation', 'LIKE', '%' . $search_for . '%');
                     $query->orWhere('employees.email', 'LIKE', '%' . $search_for . '%');
                     $query->orWhere('employees.address', 'LIKE', '%' . $search_for . '%');
                     $query->orWhere(DB::raw("DATE_FORMAT(employees.created_at, '%b %d, %Y')"), 'LIKE', '%' . $search_for . '%');
+                    $query->orWhere('employees.basicSalary', 'LIKE', '%' . $search_for . '%');
                 });
             }
 

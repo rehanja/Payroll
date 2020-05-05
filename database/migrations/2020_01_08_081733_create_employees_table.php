@@ -17,10 +17,13 @@ class CreateEmployeesTable extends Migration
 			Schema::create('employees', function (Blueprint $table) {
 				$table->bigIncrements('id');
 				$table->string('name');
+				$table->string('nic')->unique();
+				$table->string('designation')->nullable();
 				$table->string('email')->unique();							
 				$table->string('address')->nullable();
+				$table->date('doj')->nullable();
+				$table->date('basicSalary')->nullable();
 				$table->string('photo')->nullable();
-				$table->date('doj');
 				$table->bigInteger('created_by')->unsigned()->index()->nullable();
 				$table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
 				$table->bigInteger('updated_by')->unsigned()->index()->nullable();

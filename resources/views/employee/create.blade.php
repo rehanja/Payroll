@@ -27,12 +27,12 @@ Add Employee
 		</div>
 
 		<div class="form-group row">
-			<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }} <span>*</span></label>
+			<label for="Nic" class="col-md-4 col-form-label text-md-right">{{ __('Nic') }} <span>*</span></label>
 
 			<div class="col-md-6">
-				<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+				<input id="nic" type="text" class="form-control @error('nic') is-invalid @enderror" name="nic" value="{{ old('nic') }}" required autocomplete="nic" autofocus>
 
-				@error('email')
+				@error('nic')
 					<span class="invalid-feedback" role="alert">
 						<strong>{{ $message }}</strong>
 					</span>
@@ -41,15 +41,26 @@ Add Employee
 		</div>
 
 		<div class="form-group row">
-			<label for="designation" class="col-md-4 col-form-label text-md-right">{{ __('Designation') }} <span>*</span></label>
+			<label for="Designation" class="col-md-4 col-form-label text-md-right">{{ __('Designation') }} <span>*</span></label>
 
 			<div class="col-md-6">
-				<select multiple class="form-control @error('roles') is-invalid @enderror" id="designation" name="roles[]" required>
-				  @foreach($roles as $key => $role)
-				  <option value="{{$role->id}}">{{$role->name}}</option>
-				  @endforeach
-				</select>
-				@error('roles')
+				<input id="designation" type="text" class="form-control @error('designation') is-invalid @enderror" name="designation" value="{{ old('designation') }}" required autocomplete="designation" autofocus>
+
+				@error('designation')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }} <span>*</span></label>
+
+			<div class="col-md-6">
+				<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+				@error('email')
 					<span class="invalid-feedback" role="alert">
 						<strong>{{ $message }}</strong>
 					</span>
@@ -82,6 +93,20 @@ Add Employee
 
 			<div class="col-md-6">
 				<input id="doj" type="date" class="form-control @error('doj') is-invalid @enderror" name="doj" required autocomplete="date">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="BasicSalary" class="col-md-4 col-form-label text-md-right">{{ __('Basic Salary') }} <span>*</span></label>
+
+			<div class="col-md-6">
+				<input id="basicSalary" type="text" class="form-control @error('basicSalary') is-invalid @enderror" name="basicSalary" value="{{ old('basicSalary') }}" required autocomplete="basicSalary" autofocus>
+
+				@error('basicSalary')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 			</div>
 		</div>
 

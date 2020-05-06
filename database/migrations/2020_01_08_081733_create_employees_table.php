@@ -22,7 +22,7 @@ class CreateEmployeesTable extends Migration
 				$table->string('email')->unique();							
 				$table->string('address')->nullable();
 				$table->date('doj')->nullable();
-				$table->date('basicSalary')->nullable();
+				$table->string('basicSalary')->nullable();
 				$table->string('photo')->nullable();
 				$table->bigInteger('created_by')->unsigned()->index()->nullable();
 				$table->foreign('created_by')->references('id')->on('users')->onDelete('set null');

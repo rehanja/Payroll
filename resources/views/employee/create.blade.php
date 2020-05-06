@@ -27,7 +27,7 @@ Add Employee
 		</div>
 
 		<div class="form-group row">
-			<label for="Nic" class="col-md-4 col-form-label text-md-right">{{ __('Nic') }} <span>*</span></label>
+			<label for="nic" class="col-md-4 col-form-label text-md-right">{{ __('NIC') }} <span>*</span></label>
 
 			<div class="col-md-6">
 				<input id="nic" type="text" class="form-control @error('nic') is-invalid @enderror" name="nic" value="{{ old('nic') }}" required autocomplete="nic" autofocus>
@@ -41,7 +41,7 @@ Add Employee
 		</div>
 
 		<div class="form-group row">
-			<label for="Designation" class="col-md-4 col-form-label text-md-right">{{ __('Designation') }} <span>*</span></label>
+			<label for="designation" class="col-md-4 col-form-label text-md-right">{{ __('Designation') }} <span>*</span></label>
 
 			<div class="col-md-6">
 				<input id="designation" type="text" class="form-control @error('designation') is-invalid @enderror" name="designation" value="{{ old('designation') }}" required autocomplete="designation" autofocus>

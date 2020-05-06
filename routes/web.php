@@ -26,6 +26,7 @@ Route::resource('employees', 'EmployeeController')->middleware('auth');
 
 Route::post('/employees/list', 'EmployeeController@getEmployees')->name('employees.list');
 
+
 Route::resource('salary', 'SalaryController')->middleware('auth');
 
 Route::post('/salary/list', 'SalaryController@getSalaries')->name('salary.list');
@@ -33,3 +34,8 @@ Route::post('/salary/list', 'SalaryController@getSalaries')->name('salary.list')
 Route::get('/salary/{emp_id?}/list', 'SalaryController@index')->name('salary.elist')->middleware('auth');
 
 Route::get('/salary/create/{emp_id?}', 'SalaryController@create')->name('salary.ecreate')->middleware('auth');
+
+
+Route::get('/attendance', function(){
+    return view('attendance.create');
+})->middleware('auth');

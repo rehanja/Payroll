@@ -27,7 +27,8 @@ class EmployeeService
     public function store(Request $request)
     {
         //change the Employee.ph variables too
-
+        //dd($request->all());
+        
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'nic' => 'required|string|max:10|unique:employees',
@@ -56,7 +57,7 @@ class EmployeeService
 				}
 			}
 		}
-        dd($request->all());
+        
         return $is_created;
     }
 

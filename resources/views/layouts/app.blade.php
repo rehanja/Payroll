@@ -53,6 +53,9 @@
 							<li class="nav-item">
 								<a class="nav-link" href="{{ route('employees.index') }}">{{ __('Employee Management') }}</a>
 							</li>
+                            <li class="nav-item">
+								<a class="nav-link" href="{{ route('employees.index') }}">{{ __('Attendance Management') }}</a>
+							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="{{ route('salary.index') }}">{{ __('Salary Management') }}</a>
 							</li>							

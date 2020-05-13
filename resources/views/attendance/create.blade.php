@@ -9,8 +9,9 @@ Add Employee
 <a class="btn btn-primary float-right btn-sm" href="{{ route('home') }}" role="button"  title="Back"><i class="fa fa-arrow-left"></i></a>
 @endsection
 @section('empContent')
-	<form method="POST" action="{{ route('employees.store') }}" enctype="multipart/form-data">
-		@csrf
+	<form method="POST" action="/saveAttendance"  enctype="multipart/form-data">
+	{{csrf_field()}}
+		
 
 		<div class="form-group row">
 			<label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }} <span>*</span></label>
@@ -41,12 +42,12 @@ Add Employee
 		</div>
 
 		<div class="form-group row">
-			<label for="designation" class="col-md-4 col-form-label text-md-right">{{ __('Designation') }} <span>*</span></label>
+			<label for="nopay" class="col-md-4 col-form-label text-md-right">{{ __('Nopay') }} <span>*</span></label>
 
 			<div class="col-md-6">
-				<input id="designation" type="text" class="form-control @error('designation') is-invalid @enderror" name="designation" value="{{ old('designation') }}" required autocomplete="designation" autofocus>
+				<input id="nopay" type="text" class="form-control @error('nopay') is-invalid @enderror" name="nopay" value="{{ old('nopay') }}" required autocomplete="nopay" autofocus>
 
-				@error('designation')
+				@error('nopay')
 					<span class="invalid-feedback" role="alert">
 						<strong>{{ $message }}</strong>
 					</span>
@@ -55,12 +56,12 @@ Add Employee
 		</div>
 
 		<div class="form-group row">
-			<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }} <span>*</span></label>
+			<label for="OverTime1" class="col-md-4 col-form-label text-md-right">{{ __('OverTime1(OT1)') }} <span>*</span></label>
 
 			<div class="col-md-6">
-				<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+				<input id="OverTime1" type="text" class="form-control @error('OverTime1') is-invalid @enderror" name="OverTime1" value="{{ old('OverTime1') }}" required autocomplete="OverTime1">
 
-				@error('email')
+				@error('OverTime1')
 					<span class="invalid-feedback" role="alert">
 						<strong>{{ $message }}</strong>
 					</span>
@@ -69,40 +70,54 @@ Add Employee
 		</div>
 
 		<div class="form-group row">
-			<label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+			<label for="OverTime2" class="col-md-4 col-form-label text-md-right">{{ __('OverTime2(OT2)') }}<span>*</span></label>
 
 			<div class="col-md-6">
-				<input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" autocomplete="address">
+				<input id="OverTime2" type="text" class="form-control @error('OverTime2') is-invalid @enderror" name="OverTime2" autocomplete="OverTime2">
 			</div>
+			@error('OverTime2')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
 		</div>
+	
+		</div>
+
 		<div class="form-group row">
-			<label for="photo" class="col-md-4 col-form-label text-md-right">{{ __('Photo') }}</label>
+			<label for="OverTime3" class="col-md-4 col-form-label text-md-right">{{ __('OverTime3(OT3)') }}<span>*</span></label>
 
 			<div class="col-md-6">
-			    <input type="file" class="form-control-file" id="photo" name="photo">
+				<input id="OverTime3" type="text" class="form-control @error('OverTime3') is-invalid @enderror" name="OverTime3" autocomplete="OverTime3">
+			</div>
+			@error('OverTime3')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+				@enderror
+		</div>
 
-				@error('photo')
+		<div class="form-group row">
+			<label for="EarlyLeave" class="col-md-4 col-form-label text-md-right">{{ __('Early Leave') }} <span>*</span></label>
+
+			<div class="col-md-6">
+				<input id="EarlyLeave" type="text" class="form-control @error('EarlyLeave') is-invalid @enderror" name="EarlyLeave" value="{{ old('EarlyLeave') }}" required autocomplete="EarlyLeave" autofocus>
+
+				@error('EarlyLeave')
 					<span class="invalid-feedback" role="alert">
 						<strong>{{ $message }}</strong>
 					</span>
 				@enderror
 			</div>
 		</div>
-		<div class="form-group row">
-			<label for="doj" class="col-md-4 col-form-label text-md-right">{{ __('DOJ') }} <span>*</span></label>
-
-			<div class="col-md-6">
-				<input id="doj" type="date" class="form-control @error('doj') is-invalid @enderror" name="doj" required autocomplete="date">
-			</div>
-		</div>
 
 		<div class="form-group row">
-			<label for="BasicSalary" class="col-md-4 col-form-label text-md-right">{{ __('Basic Salary') }} <span>*</span></label>
+			<label for="LateLeave" class="col-md-4 col-form-label text-md-right">{{ __('LateLeave') }} <span>*</span></label>
 
 			<div class="col-md-6">
-				<input id="basicSalary" type="text" class="form-control @error('basicSalary') is-invalid @enderror" name="basicSalary" value="{{ old('basicSalary') }}" required autocomplete="basicSalary" autofocus>
+				<input id="LateLeave" type="text" class="form-control @error('LateLeave') is-invalid @enderror" name="LateLeave" value="{{ old('LateLeav') }}" required autocomplete="LateLeave" autofocus>
 
-				@error('basicSalary')
+				@error('LateLeave')
 					<span class="invalid-feedback" role="alert">
 						<strong>{{ $message }}</strong>
 					</span>

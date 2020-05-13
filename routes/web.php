@@ -39,3 +39,5 @@ Route::get('/salary/create/{emp_id?}', 'SalaryController@create')->name('salary.
 Route::get('/attendance', function(){
     return view('attendance.create');
 })->middleware('auth');
+
+Route::post('/saveAttendance','AttendanceController@store');

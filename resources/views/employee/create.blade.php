@@ -6,7 +6,7 @@ Add Employee |
 Add Employee
 @endsection
 @section('headerContent')
-<a class="btn btn-primary float-right btn-sm" href="{{ route('employees.index') }}" role="button"  title="Back"><i class="fa fa-arrow-left"></i></a>
+<a class="btn btn-primary float-right btn-sm" href="{{ route('home') }}" role="button"  title="Back"><i class="fa fa-arrow-left"></i></a>
 @endsection
 @section('empContent')
 	<form method="POST" action="{{ route('employees.store') }}" enctype="multipart/form-data">
